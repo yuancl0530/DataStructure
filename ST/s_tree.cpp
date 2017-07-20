@@ -6,9 +6,11 @@ STree::STree()
 }
 STree::~STree()
 {
-	if (ROOT)del(ROOT);
+	if (ROOT)
+		consture(ROOT);
+	
 }
-void STree::del(Node *p)
+void STree::consture(Node *p)
 {
 	static int x = 0;
 	if (p->left)
@@ -24,7 +26,7 @@ void STree::insert(int x)
 void STree::insert_(int x,Node *root)
 {
 	if (ROOT == 0){
-		ROOT = new Node(x);
+		ROOT = new Node(x,0);
 		if (!ROOT){
 			std::cout<<"No space"<<std::endl;
 			return ;
@@ -32,21 +34,20 @@ void STree::insert_(int x,Node *root)
 	}
 	else {
 		if (x < root->value){
-			if(!root->left ||x > root->left->value){
-				Node *p = root->left;
+			if (!root->left){
 				root->left = new Node(x,root);
-				root->left->left = p;
 			}
-			else insert_(x,root->left);
+			else{
+				insert_(x,root->left);
+			}
 		}
 		else{
-			if(!root->right||x < root->right->value){
-				Node *p = root->right;
+			if (!root->right){
 				root->right = new Node(x,root);
-				root->right->right = p;
 			}
-			else insert_(x,root->right);
-
+			else{
+				insert_(x,root->right);
+			}
 		}
 	}
 }
@@ -56,12 +57,12 @@ int STree::max()
 		std::cout<<"no root"<<std::endl;
 		return -1;
 	}
-	max(ROOT);
+	return 	max(ROOT)->value;
 }
-int STree::max(Node * root)
+Node* STree::max(Node * root)
 {
 	if (root->right == 0)
-		return root->value;
+		return root;
 	else
 		return max(root->right);
 }
@@ -71,12 +72,12 @@ int STree::min()
 		std::cout<<"no root"<<std::endl;
 		return -1;
 	}
-	min(ROOT);
+	return min(ROOT)->value;
 }
-int STree::min(Node * root)
+Node* STree::min(Node * root)
 {
 	if (root->left == 0)
-		return root->value;
+		return root;
 	else
 		return min(root->left);
 }
@@ -95,4 +96,47 @@ Node *STree::find(int x)
 			p=p->right;
 	}
 	return 0;
+}
+void STree::del(int x)
+{	Node *k;
+	while (k = find(x)){
+		del(k);
+	}
+}
+void STree::del(Node *p)
+{
+	if (!p)
+		return;
+	if (p == ROOT){
+		Node *temp = min(ROOT->right);
+		ROOT->value = temp->value;
+		del(temp);
+		return;
+	}
+	Node **t;
+	if (p->father->left && p->father->left->value == p->value){
+		t = &(p->father->left);
+	}
+	else{
+		t = &(p->father->right);
+	}
+	if (!(p->left || p->right)){
+		*t = 0;
+		delete p;
+	}
+	else if (p->left && !p->right){
+		*t = p->left;
+		p->left->father = p->father;
+		delete p;
+	}
+	else if (p->right && !p->left){
+		*t = p->right;
+		p->right->father = p->father;
+		delete p;
+	}
+	else {
+		Node *temp = min(p->right);
+		p->value = temp->value;
+		del(temp);
+	}
 }

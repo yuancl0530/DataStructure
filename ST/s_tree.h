@@ -18,16 +18,18 @@ class STree
 {
 private:
 	Node *ROOT;
+	void consture(Node *p);
+	void insert_(int x,Node *root);
+	Node* max(Node *root);
+	Node* min(Node *root);
+	void del(Node *p);
 public:
 	STree();
 	~STree();
-	void del(Node *p);
 	int max();
-	int max(Node *root);
 	int min();
-	int min(Node *root);
 	void insert(int x);
-	void insert_(int x,Node *root);
 	Node *find(int x);
+	void del(int x);
 };
 #endif
