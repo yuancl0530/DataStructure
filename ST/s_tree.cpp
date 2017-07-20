@@ -108,9 +108,20 @@ void STree::del(Node *p)
 	if (!p)
 		return;
 	if (p == ROOT){
-		Node *temp = min(ROOT->right);
-		ROOT->value = temp->value;
-		del(temp);
+		if (ROOT->right){
+			Node *temp = min(ROOT->right);
+			ROOT->value = temp->value;
+			del(temp);
+		}
+		else if (ROOT->left){
+			Node *temp = ROOT;
+			ROOT = ROOT->left;
+			delete temp;
+		}
+		else{
+			delete ROOT;
+			ROOT = 0;
+		}
 		return;
 	}
 	Node **t;

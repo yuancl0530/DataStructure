@@ -12,10 +12,10 @@ int main()
 	int t;
 	cout<<tree.max()<<endl;
 	cout<<tree.min()<<endl;
-	tree.del(tree.min());
-	tree.del(tree.max());
-	cout<<tree.max()<<endl;
-	cout<<tree.min()<<endl;
-
+	int n = 10;
+	while (tree.min() != -1){
+		tree.del(tree.min());
+	
+	}
 	return 0;
 }
