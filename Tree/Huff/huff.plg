@@ -1,0 +1,30 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: huff - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\YCL-VI~1\AppData\Local\Temp\RSPC19C.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/huff.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"W:\workspace\DataStructure\Tree\Huff\huff.cpp"
+]
+Creating command line "cl.exe @"C:\Users\YCL-VI~1\AppData\Local\Temp\RSPC19C.tmp"" 
+<h3>Output Window</h3>
+Compiling...
+huff.cpp
+w:\workspace\datastructure\tree\huff\huff.cpp(74) : error C2001: newline in constant
+w:\workspace\datastructure\tree\huff\huff.cpp(75) : error C2146: syntax error : missing ';' before identifier 'cin'
+w:\workspace\datastructure\tree\huff\huff.cpp(80) : error C2001: newline in constant
+w:\workspace\datastructure\tree\huff\huff.cpp(81) : error C2146: syntax error : missing ';' before identifier 'cin'
+Error executing cl.exe.
+
+
+
+<h3>Results</h3>
+huff.obj - 4 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
